@@ -1,16 +1,16 @@
 $wm: '';
 
-@mixin wm($wm) {
-  @if ($wm == 'ver-l') {
-    writing-mode: vertical-lr;
-  } @else if($wm == 'ver-r') {
-    writing-mode: vertical-rl;
+@function wm($value) {
+  @if ($value == 'ver-l') {
+    @return vertical-lr;
+  } @else if ($value == 'ver-r') {
+    @return vertical-rl;
   } @else {
-    writing-mode: horizental-tb;
+    @return horizontal-tb;
   }
 }
 
-@mixin lp($t, $wm, $values...) {
+@mixin lp($t, $values...) {
   @if ($t == 'margin' or $t == 'padding') {
     @if (length($values) == 1) {
       #{$t}: $values;
@@ -136,7 +136,7 @@ $wm: '';
     @if (length($values) == 1) {
 
       @if ($wm == 'ver-l') or ($wm == 'ver-r') {
-        width: $values;
+        #{$t}: $values;
         inline-size: $values;
       } @else {
         #{$t}: $values;
@@ -145,7 +145,7 @@ $wm: '';
     } @if (length($values) == 2) {
 
       @if ($wm == 'ver-l') or ($wm == 'ver-r') {
-        width: nth($values, 1);
+        #{$t}: nth($values, 1);
         inline-size: nth($values, 1);
         min-width: nth($values, 2);
         min-inline-size: nth($values, 2);
@@ -177,7 +177,7 @@ $wm: '';
     @if (length($values) == 1) {
 
       @if ($wm == 'ver-l') or ($wm == 'ver-r') {
-        height: $values;
+        #{$t}: $values;
         block-size: $values;
       } @else {
         #{$t}: $values;
@@ -247,124 +247,4 @@ $wm: '';
   inset-block-end: $b-end;
   inset-inline-start: $i-end;
   inset-inline-end: $i-start;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  @include lp('height', '', 100vh);
-  @include lp('width', '', 100vw);
-  display: flex;
-  flex-wrap: wrap;
-}
-
-body {
-  align-items: flex-start;
-  font-family: 'Cutive Mono', monospace;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.75rem;
-  justify-content: center;
-}
-
-.header {
-  @include lp('height', '', 100px);
-  @include lp('width', '', 100%);
-  @include lp('border', $wm, 0, 0, solid 2px black);
-  align-items: center;
-  box-shadow: 0 0 10px 5px rgba(black, 0.5);
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
-  position: sticky;
-}
-
-.wrapper {
-  @include wm($wm);
-  @include lp('border', $wm, dotted 1px black);
-  align-items: center;
-  box-shadow: 0 0 10px 5px rgba(black, 0.4);
-  display: flex;
-  justify-content: center;
-  position: relative;
-  // writing-mode: horizontal-tb;
-  // writing-mode: vertical-lr;
-  // writing-mode: vertical-rl;
-  
-  .margin {
-    @include lp('border', $wm, dashed 1px black);
-    @include lp('margin', $wm, 2rem);
-    @include lp('padding', $wm, 2rem);
-  }
-  
-  .border {
-    @include lp('border', $wm, solid 1px black, solid 2px black);
-    @include lp('padding', $wm, 2rem);
-  }
-  
-  .padding {
-    @include lp('border', $wm, dashed 1px black);
-    @include lp('padding', $wm, 2rem);
-  }
-  
-  .text {
-    @include lp('border', $wm, solid 1px lighten(black, 25%));
-    @include lp('padding', $wm, 2.5rem, 1.25rem);
-    color: black;
-  }
-  
-  .margin,
-  .border,
-  .padding,
-  .text {
-    
-    & > span {
-      @include position('absolute', 0.75rem, 0.75rem);
-      color: #ff0000;
-      font-weight: 700;
-    }
-  }
-  
-  .text {
-    @include lp('width', $wm, auto, 15rem);
-    
-    div {
-      @include lp('margin', $wm, 0, 0, 1rem);
-      @include lp('height', $wm, auto, 1rem);
-      clear: both;
-      width: 100%;
-      
-      &:last-child {
-        @include lp('margin', $wm, 0);
-      }
-    }
-  }
-  
-  .float {
-    
-    &.left {
-      @include lp('float', $wm, left);
-    }
-
-    &.right {
-      @include lp('float', $wm, right);
-    }
-  }
-  
-  .text-align {
-    
-    &.left {
-      @include lp('text-align', $wm, left);
-    }
-    
-    &.right {
-      @include lp('text-align', $wm, right);
-    }
-  }
-
-  div {
-    position: relative;
-    // @include position('absolute', 10px, 20px);
-  }
 }
