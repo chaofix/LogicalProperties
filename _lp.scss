@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto:400,700');
-
-$black: rgb(0, 0, 0);
-$white: lighten($black, 100%);
-
 $wm: '';
 
 @mixin wm($wm) {
@@ -276,9 +271,9 @@ body {
 .header {
   @include lp('height', '', 100px);
   @include lp('width', '', 100%);
-  @include lp('border', $wm, 0, 0, solid 2px $black);
+  @include lp('border', $wm, 0, 0, solid 2px black);
   align-items: center;
-  box-shadow: 0 0 10px 5px rgba($black, 0.5);
+  box-shadow: 0 0 10px 5px rgba(black, 0.5);
   display: flex;
   font-size: 1.5rem;
   justify-content: center;
@@ -287,9 +282,9 @@ body {
 
 .wrapper {
   @include wm($wm);
-  @include lp('border', $wm, dotted 1px $black);
+  @include lp('border', $wm, dotted 1px black);
   align-items: center;
-  box-shadow: 0 0 10px 5px rgba($black, 0.4);
+  box-shadow: 0 0 10px 5px rgba(black, 0.4);
   display: flex;
   justify-content: center;
   position: relative;
@@ -298,25 +293,25 @@ body {
   // writing-mode: vertical-rl;
   
   .margin {
-    @include lp('border', $wm, dashed 1px $black);
+    @include lp('border', $wm, dashed 1px black);
     @include lp('margin', $wm, 2rem);
     @include lp('padding', $wm, 2rem);
   }
   
   .border {
-    @include lp('border', $wm, solid 1px $black, solid 2px $black);
+    @include lp('border', $wm, solid 1px black, solid 2px black);
     @include lp('padding', $wm, 2rem);
   }
   
   .padding {
-    @include lp('border', $wm, dashed 1px $black);
+    @include lp('border', $wm, dashed 1px black);
     @include lp('padding', $wm, 2rem);
   }
   
   .text {
-    @include lp('border', $wm, solid 1px lighten($black, 25%));
+    @include lp('border', $wm, solid 1px lighten(black, 25%));
     @include lp('padding', $wm, 2.5rem, 1.25rem);
-    color: $black;
+    color: black;
   }
   
   .margin,
