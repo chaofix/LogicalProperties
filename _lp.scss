@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono|Roboto:400,700');
+
+$black: rgb(0, 0, 0);
+$white: lighten($black, 100%);
+
+$wm: '';
+
+@mixin wm($wm) {
+  @if ($wm == 'ver-l') {
+    writing-mode: vertical-lr;
+  } @else if($wm == 'ver-r') {
+    writing-mode: vertical-rl;
+  } @else {
+    writing-mode: horizental-tb;
+  }
+}
+
+@mixin lp($t, $wm, $values...) {
+  @if ($t == 'margin' or $t == 'padding') {
+    @if (length($values) == 1) {
+      #{$t}: $values;
+      #{$t}-block-start: $values;
+      #{$t}-inline-start: $values;
+      #{$t}-block-end: $values;
+      #{$t}-inline-end: $values;
+    } @else if (length($values) == 2) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}: nth($values, 2) nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}: nth($values, 2) nth($values, 1);
+      } @else {
+        #{$t}: nth($values, 1) nth($values, 2);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 2);
+      #{$t}-block-end: nth($values, 1);
+      #{$t}-inline-end: nth($values, 2);
+    } @else if (length($values) == 3) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}: nth($values, 2) nth($values, 3) nth($values, 2) nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}: nth($values, 2) nth($values, 1) nth($values, 2) nth($values, 3);
+      } @else {
+        #{$t}: nth($values, 1) nth($values, 2) nth($values, 3);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 2);
+      #{$t}-block-end: nth($values, 3);
+      #{$t}-inline-end: nth($values, 2);
+    } @else if (length($values) == 4) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}: nth($values, 4) nth($values, 2) nth($values, 3) nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}: nth($values, 4) nth($values, 2) nth($values, 3) nth($values, 1);
+      } @else {
+        #{$t}: nth($values, 1) nth($values, 2) nth($values, 3) nth($values, 4);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 4);
+      #{$t}-block-end: nth($values, 2);
+      #{$t}-inline-end: nth($values, 3);
+    }
+  } @else if ($t == 'border') {
+    @if (length($values) == 1) {
+      #{$t}: $values;
+      #{$t}-block-start: $values;
+      #{$t}-inline-start: $values;
+      #{$t}-block-end: $values;
+      #{$t}-inline-end: $values;
+    } @else if (length($values) == 2) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}-top: nth($values, 2);
+        #{$t}-right: nth($values, 1);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}-top: nth($values, 2);
+        #{$t}-right: nth($values, 1);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 1);
+      } @else {
+        #{$t}-top: nth($values, 1);
+        #{$t}-right: nth($values, 2);
+        #{$t}-bottom: nth($values, 1);
+        #{$t}-left: nth($values, 2);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 2);
+      #{$t}-block-end: nth($values, 1);
+      #{$t}-inline-end: nth($values, 2);
+    } @else if (length($values) == 3) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}-top: nth($values, 2);
+        #{$t}-right: nth($values, 3);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}-top: nth($values, 2);
+        #{$t}-right: nth($values, 1);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 3);
+      } @else {
+        #{$t}-top: nth($values, 1);
+        #{$t}-right: nth($values, 2);
+        #{$t}-bottom: nth($values, 3);
+        #{$t}-left: nth($values, 2);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 2);
+      #{$t}-block-end: nth($values, 3);
+      #{$t}-inline-end: nth($values, 2);
+    } @else if (length($values) == 4) {
+
+      @if ($wm == 'ver-l') {
+        #{$t}-top: nth($values, 4);
+        #{$t}-right: nth($values, 3);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 1);
+      } @else if ($wm == 'ver-r') {
+        #{$t}-top: nth($values, 4);
+        #{$t}-right: nth($values, 1);
+        #{$t}-bottom: nth($values, 2);
+        #{$t}-left: nth($values, 3);
+      } @else {
+        #{$t}-top: nth($values, 1);
+        #{$t}-right: nth($values, 2);
+        #{$t}-bottom: nth($values, 3);
+        #{$t}-left: nth($values, 4);
+      }
+      #{$t}-block-start: nth($values, 1);
+      #{$t}-inline-start: nth($values, 4);
+      #{$t}-block-end: nth($values, 3);
+      #{$t}-inline-end: nth($values, 2);
+    }
+  } @else if ($t == 'height') {
+    @if (length($values) == 1) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        width: $values;
+        inline-size: $values;
+      } @else {
+        #{$t}: $values;
+        block-size: $values;
+      }
+    } @if (length($values) == 2) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        width: nth($values, 1);
+        inline-size: nth($values, 1);
+        min-width: nth($values, 2);
+        min-inline-size: nth($values, 2);
+      } @else {
+        #{$t}: nth($values, 1);
+        block-size: nth($values, 1);
+        min-#{$t}: nth($values, 2);
+        min-block-size: nth($values, 2);
+      }
+    } @if (length($values) == 3) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        width: nth($values, 1);
+        inline-size: nth($values, 1);
+        min-width: nth($values, 2);
+        min-inline-size: nth($values, 2);
+        max-width: nth($values, 3);
+        max-inline-size: nth($values, 3);
+      } @else {
+        #{$t}: nth($values, 1);
+        block-size: nth($values, 1);
+        min-#{$t}: nth($values, 2);
+        min-block-size: nth($values, 2);
+        max-#{$t}: nth($values, 3);
+        max-block-size: nth($values, 3);
+      }
+    }
+  } @else if ($t == 'width') {
+    @if (length($values) == 1) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        height: $values;
+        block-size: $values;
+      } @else {
+        #{$t}: $values;
+        inline-size: $values;
+      }
+    } @if (length($values) == 2) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        height: nth($values, 1);
+        block-size: nth($values, 1);
+        min-height: nth($values, 2);
+        min-block-size: nth($values, 2);
+      } @else {
+        #{$t}: nth($values, 1);
+        inline-size: nth($values, 1);
+        min-#{$t}: nth($values, 2);
+        min-inline-size: nth($values, 2);
+      }
+    } @if (length($values) == 3) {
+
+      @if ($wm == 'ver-l') or ($wm == 'ver-r') {
+        height: nth($values, 1);
+        block-size: nth($values, 1);
+        min-height: nth($values, 2);
+        min-block-size: nth($values, 2);
+        max-height: nth($values, 3);
+        max-block-size: nth($values, 3);
+      } @else {
+        #{$t}: nth($values, 1);
+        inline-size: nth($values, 1);
+        min-#{$t}: nth($values, 2);
+        min-inline-size: nth($values, 2);
+        max-#{$t}: nth($values, 3);
+        max-inline-size: nth($values, 3);
+      }
+    }
+  } @else if ($t == 'float') {
+    @if (nth($values, 1) == 'left') {
+      #{$t}: $values;
+      #{$t}: inline-start;
+    } @else if(nth($values, 1) == 'right') {
+      #{$t}: $values;
+      #{$t}: inline-end;
+    }
+  } @else if ($t == 'text-align') {
+    @if (nth($values, 1) == 'left') {
+      #{$t}: $values;
+      #{$t}: start;
+    } @else if(nth($values, 1) == 'right') {
+      #{$t}: $values;
+      #{$t}: end;
+    }
+  }
+}
+
+@mixin position($t, $b-start: null, $i-start: null, $b-end: null, $i-end: null) {
+  @if ($t == 'absolute') {
+    position: absolute;
+  } @else if ($t == 'relative') {
+    position: relative;
+  };
+  top: $b-start;
+  right: $i-end;
+  bottom: $b-end;
+  left: $i-start;
+  inset-block-start: $b-start;
+  inset-block-end: $b-end;
+  inset-inline-start: $i-end;
+  inset-inline-end: $i-start;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  @include lp('height', '', 100vh);
+  @include lp('width', '', 100vw);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body {
+  align-items: flex-start;
+  font-family: 'Cutive Mono', monospace;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.75rem;
+  justify-content: center;
+}
+
+.header {
+  @include lp('height', '', 100px);
+  @include lp('width', '', 100%);
+  @include lp('border', $wm, 0, 0, solid 2px $black);
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgba($black, 0.5);
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  position: sticky;
+}
+
+.wrapper {
+  @include wm($wm);
+  @include lp('border', $wm, dotted 1px $black);
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgba($black, 0.4);
+  display: flex;
+  justify-content: center;
+  position: relative;
+  // writing-mode: horizontal-tb;
+  // writing-mode: vertical-lr;
+  // writing-mode: vertical-rl;
+  
+  .margin {
+    @include lp('border', $wm, dashed 1px $black);
+    @include lp('margin', $wm, 2rem);
+    @include lp('padding', $wm, 2rem);
+  }
+  
+  .border {
+    @include lp('border', $wm, solid 1px $black, solid 2px $black);
+    @include lp('padding', $wm, 2rem);
+  }
+  
+  .padding {
+    @include lp('border', $wm, dashed 1px $black);
+    @include lp('padding', $wm, 2rem);
+  }
+  
+  .text {
+    @include lp('border', $wm, solid 1px lighten($black, 25%));
+    @include lp('padding', $wm, 2.5rem, 1.25rem);
+    color: $black;
+  }
+  
+  .margin,
+  .border,
+  .padding,
+  .text {
+    
+    & > span {
+      @include position('absolute', 0.75rem, 0.75rem);
+      color: #ff0000;
+      font-weight: 700;
+    }
+  }
+  
+  .text {
+    @include lp('width', $wm, auto, 15rem);
+    
+    div {
+      @include lp('margin', $wm, 0, 0, 1rem);
+      @include lp('height', $wm, auto, 1rem);
+      clear: both;
+      width: 100%;
+      
+      &:last-child {
+        @include lp('margin', $wm, 0);
+      }
+    }
+  }
+  
+  .float {
+    
+    &.left {
+      @include lp('float', $wm, left);
+    }
+
+    &.right {
+      @include lp('float', $wm, right);
+    }
+  }
+  
+  .text-align {
+    
+    &.left {
+      @include lp('text-align', $wm, left);
+    }
+    
+    &.right {
+      @include lp('text-align', $wm, right);
+    }
+  }
+
+  div {
+    position: relative;
+    // @include position('absolute', 10px, 20px);
+  }
+}
