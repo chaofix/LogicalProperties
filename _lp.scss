@@ -241,11 +241,11 @@ $wm: '';
     position: relative;
   };
   top: $b-start;
-  right: $i-end;
+  right: $i-start;
   bottom: $b-end;
-  left: $i-start;
+  left: $i-end;
   inset-block-start: $b-start;
   inset-block-end: $b-end;
-  inset-inline-start: $i-end;
-  inset-inline-end: $i-start;
+  inset-inline-start: $i-start;
+  inset-inline-end: $i-end;
 }
